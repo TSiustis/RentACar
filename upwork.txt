@@ -1,0 +1,27 @@
+he task is to design, implement, test and demonstrate an e-commerce website for a business which requires rent/sell products and services. The languages used should be ASP.NET and C#. The project should be developed using VISUAL STUDIO and only the visual studio project zip is required. The secure website should collect details about the user and the user’s selected product(s)/service(s), display those details on another page and as for user’s confirmation. You are free to choose the theme of the website (some ideas are found below under Website Ideas). Your website should have the following functionality:
+
+BASIC FUNCTIONALITY
+Page 1 – About the company
+Page 2 – User select an item from a number of shown items, and enters his/her details. Make use of controls and validation. The item details are stored and retrieved into/from a database.
+Page 3 – Once the information on page 2 is submitted, the user details and the selected item details are displayed on page 3 (use sessions). If the details are correct, then the user presses the ‘make reservation’ button. Once the information on page 3 is submitted, page 4 is shown.
+Page 4 –A confirmation page with a confirmation message, the user details and the booking details.
+
+Extra Features
+• Register: Members must register onto the website via a login screen. Only registered members can make a rent/purchase. Account details must be stored in a database. Data entry must be validated to ensure data integrity.
+• Update account details: Members can update their own account details.
+• Browse Website: Visitors can browse the website using the website’s navigation menus.
+• Search: Visitors can view/search available items which are stored in a database based on a search text. Users are provided with the search results (and optionally a list of ‘similar’ items. You can design your own criteria to determine what is ‘similar’).
+• Security: The website should allow administrators to log in and edit the database, e.g. add extra items. Data entry must be validated to ensure data integrity.
+• A site map: A site map showing the contents of your site.
+• Aesthetics: Use of Cascading style sheets.
+• Shopping basket: Members can place items in a shopping basket and go on to purchase them (actual payment processing is not required or permitted). This should be persistent across pages of the website. You could also choose to implement storage of the shopping basket when the user navigates away from the website.
+• APIs: Include Google map APIs, sentiment analysis APIs, etc.
+
+Website Ideas
+• A car rental website
+• A hotel room reservation website
+• A wedding dress rental website
+• A party venue reservation
+• A music instrument rental website
+• A bouncy castle rental website
+• Any e-commence website
