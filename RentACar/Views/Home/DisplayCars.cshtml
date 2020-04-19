@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RentACar.Models.DisplayCarViewModel>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @Html.DisplayFor(modelItem => item.Make)
+    @Html.DisplayFor(modelItem => item.Model)
+    @Html.DisplayFor(modelItem => item.Year)
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        @Html.RouteLink("Rental", new { action = "Create", controller = "Rental"})
+    </td>
+</tr>
+}
+
+</table>
