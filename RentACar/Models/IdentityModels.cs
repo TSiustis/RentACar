@@ -28,5 +28,9 @@ namespace RentACar.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<RentACar.Models.Rental> Rentals { get; set; }
+
+        public System.Data.Entity.DbSet<RentACar.Models.Customer> Customers { get; set; }
     }
 }

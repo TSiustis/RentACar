@@ -11,12 +11,12 @@ namespace RentACar.Controllers
     {
         DbController dbConnection = new DbController();
         // GET: Rental
-      
+      [Authorize]
         public ActionResult Index()
         {
-         //   List<Rental> Rentals = dbConnection.GetRentals();
+            //List<Rental> Rentals = dbConnection.GetRentals();
 
-           // ViewBag.Rentals = Rentals;
+            //ViewBag.Rentals = Rentals;
             return View();
         }
         // GET: Rental/Details/5
@@ -35,21 +35,34 @@ namespace RentACar.Controllers
         }
 
         // POST: Rental/Create
+        //[HttpPost]
+        //public ActionResult Create()
+        //{
+        //    try
+        //    {
+        //        dbConnection.InsertRental(ViewBag.Year, ViewBag.Make, ViewBag.Model, ViewBag.StartDate, ViewBag.EndDate);
+
+        //        return RedirectToAction("Confirmation");
+        //    }
+        //    catch
+        //    {
+        //        return View("Error");
+        //    }
+        //}
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult InsertRental()
         {
-            try
-            {
-                // TODO: Add insert logic here
+            //try
+            //{
+                dbConnection.InsertRental(ViewBag.Year, ViewBag.Make, ViewBag.Model, ViewBag.StartDate, ViewBag.EndDate);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                return View("Confirmation");
+            //}
+            //catch
+            //{
+            //    return View("Error");
+            //}
         }
-
         // GET: Rental/Edit/5
         public ActionResult Edit(int id)
         {

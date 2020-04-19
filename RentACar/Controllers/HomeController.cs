@@ -9,13 +9,14 @@ namespace RentACar.Controllers
 {
     public class HomeController : Controller
     {
+        private DbController dbController = new DbController();
         public ActionResult Index()
         {
             return View();
         }
         public ActionResult DisplayCars()
         {
-           var cars = new List<DisplayCarViewModel> { new DisplayCarViewModel(){Year = 2016,Make = "Toyota",Model="Corolla",Price=13}};
+           var cars = dbController.GetCars();
 
             return View(cars);
         }

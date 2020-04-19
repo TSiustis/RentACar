@@ -246,6 +246,7 @@
     <Content Include="Views\Rental\Create.cshtml" />
     <Content Include="Views\Rental\Update.cshtml" />
     <Content Include="Views\Home\DisplayCars.cshtml" />
+    <Content Include="Views\Rental\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

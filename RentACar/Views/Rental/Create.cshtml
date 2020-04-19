@@ -2,77 +2,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @{
     ViewBag.Title = "InsertRentForm";
 }
     <div class="row">
-        <form action="InsertRent">
-            <div class="col-lg-10">
-                <div class="form-row">
-                    <div class="form-group">
-                        <div class="form-group col-lg-6">
-                            <select id="CarMake" name="CarMake" class="form-control">
-                                <option value="0" disabled selected>None</option>
-                                <option value="Audi">Audi</option>
-                                <option value="BMW">BMW</option>
-                                <option value="Lexus">Lexus</option>
-                                <option value="Porsche">Porsche</option>
-                                <option value="Subaru">Subaru</option>
-                            </select>
-                            <label> Car Make </label>
-                        </div>
-
-                        <div class="form-group">
-                            <select id="CarModel" name="CarModel" class="form-control">
-                                <option value="0" disabled selected>None</option>
-                                <option value="Compact">Compact</option>
-                                <option value="Luxury">Luxury</option>
-                                <option value="Standard">Standard</option>
-
-                            </select>
-                            <label> Car Model </label>
-                        </div>
-                    </div>
-                </div>
-
+        @using (Html.BeginForm("InsertRental", "RentalController", FormMethod.Post))
+        {
+            <div class="form-row">
                 <div class="form-group">
-                    <div class="col-lg-6">
-
-                        <input type="date" class="datepicker form-control" name="DateStart" />
-                        <label>Date Start</label>
+                    <div class="form-group col-lg-6">
+                        <select id="Make" name="Make" class="form-control">
+                            <option value="0" disabled selected>None</option>
+                            <option value="Audi">Audi</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Subaru">Subaru</option>
+                        </select>
+                        <label> Make </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="">
-                            <input id="MileageStart" name="MileageStart" type="number" class="validate">
-                            <label class="active" for="MileageStart">Mileage Start</label>
-                        </div>
-                        <div class=" hide">
-                            <select id="MileageEnd" name="MileageEnd">
-                                <option value="0">None</option>
-                            </select>
-                        </div>
-                        <div class="hide">
-                            <input placeholder="Total" id="Total" type="text" class="validate" name="Total" value=0>
-                            <label for="Total">Total</label>
-                        </div>
-                        <div class="hide">
-                            <input placeholder="Total" id="Total" type="text" class="validate" name="Total" value=0>
-                            <label for="Total">Total</label>
-                        </div>
+                        <select id="Model" name="Model" class="form-control">
+                            <option value="0" disabled selected>None</option>
+                            <option value="Compact">Compact</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Standard">Standard</option>
+
+                        </select>
+                        <label> Model </label>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <input id="DaysUse" name="DaysUse" type="number">
-                    <label class="active" for="DaysUse">How many Days?</label>
+            <div class="form-group">
+                <div class="col-lg-6">
+
+                    <input type="date" class="datepicker form-control" name="StartDate" />
+                    <label>Start Date</label>
                 </div>
+                <div class="col-lg-6">
 
-                <button class="btn waves-effect waves-light black" type="Reset" value="Reset" name="action" style="right: 20px;">Reset</button>
+                    <input type="date" class="datepicker form-control" name="EndDate" />
+                    <label>End Date</label>
+                </div>
+                <div class="col-lg-2">
+                    <input placeholder="Year" id="Year" type="text" class="validate" name="Year">
+                    <label for="Year">Year</label>
+                </div>
+                <div class="form-group">
 
-                <button class="btn waves-effect waves-light black" type="Submit" value="Submit" name="action">Send</button>
+                    <div class="hide">
+                        <input placeholder="Total" id="Total" type="text" class="validate" name="Total" value=0>
+                        <label for="Total">Total</label>
+                    </div>
+                    <div class="hide">
+                        <input placeholder="Total" id="Total" type="text" class="validate" name="Total" value=0>
+                        <label for="Total">Total</label>
+                    </div>
+                </div>
+            </div>
 
-        </form>
+
+
+            <button class="btn waves-effect waves-light black" type="Reset" value="Reset" name="action" style="right: 20px;">Reset</button>
+
+            <button class="btn waves-effect waves-light black" type="Submit" value="Submit" name="action">Send</button>
+
+
+        }
     </div>
-</div>

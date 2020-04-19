@@ -11,11 +11,15 @@ namespace RentACar.Controllers
     public class DbController
     {
         private SqlConnection connString = new SqlConnection();
+        public DbController()
+        {
+            connString.ConnectionString = System.Configuration.ConfigurationManager.
+    ConnectionStrings["DefaultConnection"].ConnectionString;
+        }
         public List<Car> GetCars()
         {
             List<Car> cars = new List<Car>();
             string SelectCommand = "SELECT * FROM Car;";
-            connString.ConnectionString = "";
             connString.Open();
             SqlCommand sqlCommand = connString.CreateCommand();
             sqlCommand.CommandText = SelectCommand;
@@ -23,11 +27,9 @@ namespace RentACar.Controllers
             while (sqlReader.Read())
             {
                 int year = (int)sqlReader["Year"];
-                string make = (string)sqlReader["make"];
-                string model = (string)sqlReader["model"];
+                string make = (string)sqlReader["Make"];
+                string model = (string)sqlReader["Model"];
                 string color = (string)sqlReader["Color"];
-                int numberOfDoors = (int)sqlReader["NumberOfDoors"];
-                int numberOfSeats = (int)sqlReader["NumberOfSeats"];
 
                 cars.Add(new Car(year, make, model, color));
 
@@ -37,6 +39,8 @@ namespace RentACar.Controllers
             return cars;
             
         }
+
+
         ////TBD!!!//
         //public List<Rental> GetRentals()
         //{
@@ -64,7 +68,7 @@ namespace RentACar.Controllers
         //    return rental;
 
         //}
-        public bool InsertRental(int year, string make,string model, string color, DateTimeOffset StartDate, DateTimeOffset EndDate,int customerId, int carId)
+        public bool InsertRental(int year, string make,string model,  DateTimeOffset StartDate, DateTimeOffset EndDate)
         {
             string insertSql = "Insert into Rental(Year,Make,Model,Color,StartDate,EndDate,CustomerId,CarId";
             connString.Open();

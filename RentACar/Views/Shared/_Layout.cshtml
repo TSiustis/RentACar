@@ -24,6 +24,14 @@
                     <li>@Html.ActionLink("Home", "DisplayCars", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Rent a Car", "Create", "Rental")</li>
+
+                    @{
+                        if (Request.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("MyRentals", "Index", "Rental")</li>
+ }
+                    }
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
