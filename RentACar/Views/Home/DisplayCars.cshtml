@@ -3,12 +3,15 @@
 @{
     ViewBag.Title = "View";
 }
-[Authorized]
-<h2>View</h2>
 
+<h2>Our Cars</h2>
+@{ if (User.IsInRole("Administrators"))
+    {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+        }
+    }
 <table class="table">
     <tr>
         <th></th>
@@ -19,11 +22,22 @@
     <td>@Html.DisplayFor(modelItem => item.Make)</td>
     <td> @Html.DisplayFor(modelItem => item.Model)</td>
     <td> @Html.DisplayFor(modelItem => item.Year)</td>
-<td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        @Html.RouteLink("Rental", new { action = "Create", controller = "Rental"})
+    <td>
+        @{
+            if (User.IsInRole("Administrators"))
+            {
+
+
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) ;
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ });
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ });
+            }
+        }
+        @{if (Request.IsAuthenticated)
+            {
+                @Html.RouteLink("Rent", new { action = "Create", controller = "Rental" });
+            }
+        }
     </td>
 </tr>
 }

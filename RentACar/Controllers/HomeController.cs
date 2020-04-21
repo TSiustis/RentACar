@@ -20,6 +20,7 @@ namespace RentACar.Controllers
 
             return View(cars);
         }
+        //Change this
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

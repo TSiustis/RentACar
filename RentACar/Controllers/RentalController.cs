@@ -1,4 +1,5 @@
-﻿using RentACar.Models;
+﻿using Microsoft.AspNet.Identity;
+using RentACar.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,54 +15,71 @@ namespace RentACar.Controllers
       [Authorize]
         public ActionResult Index()
         {
-            //List<Rental> Rentals = dbConnection.GetRentals();
-
-            //ViewBag.Rentals = Rentals;
+            List<Rental> ListOfRentals = new List<Rental>();
+            ListOfRentals = dbConnection.GetRentals();
+            string[] arr = User.Identity.GetUserId().Split();
+            int Id;
+            Int32.TryParse(arr[0],out Id);
+            var myRent = ListOfRentals.Where(c => c.Id==Id);
+            if (myRent.Count() > 0)
+            {
+                ViewBag.Shown = true;
+            }
+            else
+                ViewBag.Shown = false;
+            ViewBag.Id = Id;
             return View();
         }
-        // GET: Rental/Details/5
-        public ActionResult Details(int id)
-        {
-           // List<Rental> Rentals = dbConnection.GetRentals();
-            //var rental = Rentals.Where(c => c.Id == id);
-            //ViewBag.Rental = rental;
-            return View();
-        }
 
-        // GET: Rental/Create
         public ActionResult Create()
         {
-            return View();
+            var cars = dbConnection.GetCars();
+           ViewBag.ListMake =
+                new SelectList(dbConnection.GetCars()
+                .Select(x => new { value = x.Id, text = x.Make + " " + x.Model + " " + x.Year }).Distinct(),"Value","Text");
+         
+            
+
+                return View();
         }
 
-        // POST: Rental/Create
-        //[HttpPost]
-        //public ActionResult Create()
-        //{
-        //    try
-        //    {
-        //        dbConnection.InsertRental(ViewBag.Year, ViewBag.Make, ViewBag.Model, ViewBag.StartDate, ViewBag.EndDate);
-
-        //        return RedirectToAction("Confirmation");
-        //    }
-        //    catch
-        //    {
-        //        return View("Error");
-        //    }
-        //}
+      
+     
         [HttpPost]
-        public ActionResult InsertRental()
+        public ActionResult Confirmation(int? Id, FormCollection form,int? CarId,string CarName, DateTimeOffset StartDate, DateTimeOffset EndDate, string FirstName, string LastName, string  Address, string City,string PostCode, string PhoneNumber)
         {
-            //try
-            //{
-                dbConnection.InsertRental(ViewBag.Year, ViewBag.Make, ViewBag.Model, ViewBag.StartDate, ViewBag.EndDate);
-
+            //  CarId = (int)ListMake.Where(x => x.Selected).FirstOrDefault();
+            double Total = 0, DaysUse;
+            DaysUse =(EndDate - StartDate).TotalDays; 
+            if (CarName.Equals("Toyota"))
+            {
+                Total += (22.99 * DaysUse);
+            }
+            else if (CarName.Equals("Audi"))
+            {
+                Total += (30 * DaysUse);
+            }
+            else
+                Total = (50 * DaysUse);
+            ViewBag.Total = Total;
+            ViewBag.DaysUse = DaysUse;
+           
+            int CarIdd;
+             Int32.TryParse(form["ListMake"],out CarIdd);
+            CarName = form["CarName"];
+            ViewBag.CarName = CarName;
+            ViewBag.FirstName = FirstName;
+            ViewBag.LastName = LastName;
+            
+            if (ModelState.IsValid)
+            {
+                dbConnection.InsertRental(CarIdd, CarName, FirstName, LastName, Address, City, PostCode, PhoneNumber, StartDate, EndDate);
+                return View();
+            }
+            else
                 return View("Confirmation");
             //}
-            //catch
-            //{
-            //    return View("Error");
-            //}
+         
         }
         // GET: Rental/Edit/5
         public ActionResult Edit(int id)
@@ -90,7 +108,17 @@ namespace RentACar.Controllers
         {
             return View();
         }
+        public ActionResult Details(int id)
+        {
+            List<Rental> ListOfRentals = new List<Rental>();
+            ListOfRentals = dbConnection.GetRentals();
 
+            var rentDetails = ListOfRentals.Where(c=>c.Id == id);
+
+            ViewBag.ListOfRent = rentDetails;
+            ViewBag.Id = id;
+            return View();
+        }
         // POST: Rental/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

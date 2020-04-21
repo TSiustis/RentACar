@@ -23,12 +23,12 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "DisplayCars", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Rent a Car", "Create", "Rental")</li>
+                    <li>@Html.ActionLink("View Cars", "DisplayCars", "Home")</li>
 
                     @{
                         if (Request.IsAuthenticated)
                         {
-                            <li>@Html.ActionLink("MyRentals", "Index", "Rental")</li>
+                            <li>@Html.ActionLink("MyRentals", "Index/{Id}", "Rental")</li>
  }
                     }
                     
@@ -41,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Rent A Car</p>
         </footer>
     </div>
 
